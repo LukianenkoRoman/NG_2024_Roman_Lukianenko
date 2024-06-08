@@ -1,29 +1,26 @@
-using system;
+using System;
 
 namespace Task_1
 {
-    public class Balabce
+    public class Balance
     {
-        Client client = new Client();
-        Transaction transaction = new Transaction();
+        private int _balanceId;
+        private float _balanceAmount;
 
-        
-        int id = client.ClientID();
-
-        private int _balanceid = id;
-
-        private int _balanceamount;
-        
-        public getbalance()
+        public Balance(int balanceId)
         {
-            return _balanceamount;
+            _balanceId = balanceId;
+            _balanceAmount = 0; 
         }
 
-        public updateBalance()
+        public float GetBalance()
         {
-            transaclion.TransDetails();
-            int sum = _transamount;
-            _balanceamount + sum;
+            return _balanceAmount;
+        }
+
+        public void UpdateBalance(float amount)
+        {
+            _balanceAmount += amount;
         }
     }
 }

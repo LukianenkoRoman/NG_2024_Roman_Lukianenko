@@ -1,29 +1,48 @@
-using system;
+using System;
+using System.Transactions;
 
 namespace Task_1
 {
     public class Client
     {
-        Transaction transaction = new Transaction();
-        Balance balance = new Balance();
+        private int _accountNumber;
+        private int _clientId;
+        private string _clientName;
 
-        private int _acountNumber = _clientid;
-        private int _clientid;
-        private string _clientname;
+        private Transaction transaction;
+        private Balance balance;
+        private List<Transaction> transactions = new List<Transaction>();
 
-        public void ClientId()
+
+        public List<Transaction> GetTransactions()
         {
-            return _clientid;
+            return transactions;
         }
 
-        public void deposit()
+        public Client(int clientId, string clientName)
         {
-            transaction.RecordTrans();
+            _clientId = clientId;
+            _clientName = clientName;
+            _accountNumber = clientId;
+
+            transaction = new Transaction();
+            balance = new Balance(_clientId);
         }
 
-        public void getBalance()
+        public int ClientId()
         {
-            balance.getbalance();
+            return _clientId;
+        }
+
+        public void Deposit(int transId, float transAmount, int transTime)
+        {
+            transaction.RecordTrans(transId, transAmount, transTime);
+            balance.UpdateBalance(transAmount);
+        }
+
+        public float GetBalance()
+        {
+            return balance.GetBalance();
         }
     }
 }
