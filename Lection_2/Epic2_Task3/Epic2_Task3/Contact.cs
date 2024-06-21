@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Epic2_Task2
+namespace Epic2_Task3
 {
     class Person
     {
