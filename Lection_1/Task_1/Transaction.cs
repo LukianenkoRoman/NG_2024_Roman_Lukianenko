@@ -1,23 +1,25 @@
-using System;
+using system;
 
 namespace Task_1 
 {
     public class Transaction
     {
-        private int _transId;
-        private float _transAmount;
-        private int _transTime;
+        private int _transid;
+        private float _transamount;
+        private datetime _transtime;
 
-        public void RecordTrans(int transId, float transAmount, int transTime)
+        public void RecordTrans()
         {
-            _transId = transId;
-            _transAmount = transAmount;
-            _transTime = transTime;
+            set { _transid = value; }
+            set { _transamount = value; }
+            set { _transtime = value; }
         }
 
-        public (int TransId, float TransAmount, int TransTime) TransDetails()
+        public TransDetails()
         {
-            return (_transId, _transAmount, _transTime);
+            return _transid;
+            return _transamount;
+            return _transtime;
         }
     }
 }
