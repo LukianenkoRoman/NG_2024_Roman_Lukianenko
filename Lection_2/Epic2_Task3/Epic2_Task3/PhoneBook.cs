@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Epic2_Task3
 {
@@ -42,22 +43,18 @@ namespace Epic2_Task3
             }
         }
 
-        public void GetByNAme()
+        public void GetByName(string name) 
         {
-            string oreder = Console.ReadLine();
+            var order = contacts.Find(c => c.Name == name);
 
-            var contname = contacts.FirstOrDefault(c => c.Name == oreder);
-            Console.WriteLine(contname.Name, contname.Number);
+            Console.WriteLine($"{order.Name} - {order.Number}");
         }
 
-        public void GetByPhone()
+        public void GetByPhone(string num)
         {
-            string oreder = Console.ReadLine();
+            var ordernum = contacts.Find(c => c.Number == num);
 
-            var contname = contacts.FirstOrDefault(c => c.Name == oreder);
-            Console.WriteLine(contname.Name, contname.Number);
+            Console.WriteLine($"{ordernum.Number} - {ordernum.Name}");
         }
-
-
     }
 }
