@@ -23,18 +23,22 @@ class Program
             {
                 case 1:
                     int id = 3;
-                    service.GameByID(id);
+                    service.GetGameByID(id);
                     return;
                 case 2:
-                    service.PriceRange(500, 1500);
+                    service.GetGaneByPriceRange(500, 1500);
                     return;
                 case 3:
-                    service.GetByGenre(4); 
+                    var games = service.GetGameByGenre(5); 
+                    foreach (var game in games)
+                    {
+                        Console.WriteLine(game.Name);
+                    }
                     return;
                 case 4:
-                    var filtered = service.GenreFilter(new List<string>() { "Shooter", "Strategy" });
+                    var filteredGames = service.GetFilteredByGenre(new List<string>() { "Shooter", "Strategy" });
 
-                    foreach (var game in filtered)
+                    foreach (var game in filteredGames)
                     {
                         foreach (var genre in game.Genres)
                         {
@@ -44,22 +48,19 @@ class Program
                     }
                     return;
                 case 5:
-                    List<Game> showGamens = service.GetFirstFive();
-                    foreach (Game game in showGamens) 
-                    {
-                        Console.WriteLine($"Name: {game.Name}"); 
-                        
-                    }
-                    Console.WriteLine("Show more? y or n");
-                    string chos = Console.ReadLine();
-                    if ( chos == "y")
-                    {
-                        List<Game> allGames = service.GetFirstFive(true);
-                        foreach (Game game in allGames)
-                        {
-                            Console.WriteLine($"Name: {game.Name}");
+                    var firstPage = service.GetGamesByPagination(new PaginationModel { PageNumber = 1, PageSize = 5 });
 
-                        }
+                    var secondPage = service.GetGamesByPagination(new PaginationModel { PageNumber = 2, PageSize = 5 });
+
+                    Console.WriteLine("Page 1:");
+                    foreach (var game in firstPage)
+                    {
+                        Console.WriteLine(game.Name);
+                    }
+                    Console.WriteLine("Page 2:");
+                    foreach(var game in secondPage)
+                    {
+                        Console.WriteLine(game.Name);
                     }
                     return;
                 default:

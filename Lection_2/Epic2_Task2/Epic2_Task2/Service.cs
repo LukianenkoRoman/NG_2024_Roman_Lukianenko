@@ -88,52 +88,43 @@ namespace Epic2_Task2
             });
         }
 
-        public void GameByID(int id)
+        public void GetGameByID(int id)
         {
             var game = Games.FirstOrDefault(x => x.Id == id);
             Console.WriteLine(game.Name);
         }
 
-        public List<Game> PriceRange(int min, int max)
+        public List<Game> GetGaneByPriceRange(int minPrice, int maxPrice)
         {
-            var inRange = Games.Where(g => g.Price >= min && g.Price <= max).ToList();
+            var inPriceRange = Games.Where(g => g.Price >= minPrice && g.Price <= maxPrice).ToList();
             
-            foreach (var game in inRange)
+            foreach (var game in inPriceRange)
             {
                 Console.WriteLine(game.Name); 
             }
 
-            return inRange;
+            return inPriceRange;
         }
 
-        public void GetByGenre(int id)
+        public List<Game> GetGameByGenre(int id)
         {
-            var selected = Games.FirstOrDefault(x => x.Id == id);
+            var selectedGanre = Games.FirstOrDefault(x => x.Id == id);
 
-            var samegenre = Games.Where(game => game.Genres.Any(genre => genre.Name == selected.Genres[0].Name));
+            var sameGenre = Games.Where(game => game.Genres.Any(genre => genre.Name == selectedGanre.Genres[0].Name));
 
-            foreach (var game in samegenre)
-            {
-                Console.WriteLine(game.Name);
-            }
+            return sameGenre.ToList();
         }
 
-        public List<Game> GenreFilter(List<string> genres)
+        public List<Game> GetFilteredByGenre(List<string> genres)
         {
-            var filtered = Games.Where(g => g.Genres.Any(genre => genres.Contains(genre.Name)));
-            return filtered.ToList();
+            var filteredGames = Games.Where(g => g.Genres.Any(genre => genres.Contains(genre.Name)));
+            return filteredGames.ToList();
         }
 
-        public List<Game> GetFirstFive(bool allGames = false)
+        public List<Game> GetGamesByPagination(PaginationModel pagination)
         {
-            if (!allGames)
-            {
-                return Games.Take(5).ToList(); 
-            }
-            else
-            {
-                return Games.ToList(); 
-            }
+            var currentPage = Games.Take(pagination.PageSize).ToList();
+            return currentPage;
         }
     }
 }
