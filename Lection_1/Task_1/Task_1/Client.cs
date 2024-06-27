@@ -3,11 +3,11 @@ using System.Transactions;
 
 namespace Task_1
 {
-    public class Client
+    public class Client : Person
     {
-        private int _accountNumber;
-        private int _clientId;
-        private string _clientName;
+        private int _AccountNumber;
+        private int _ClientId;
+        private string _ClientName;
 
         private Transaction transaction;
         private Balance balance;
@@ -19,25 +19,27 @@ namespace Task_1
             return transactions;
         }
 
-        public Client(int clientId, string clientName)
+        public Client(int personId, string address, int clientId, string clientName)
+            :base(personId, address)
         {
-            _clientId = clientId;
-            _clientName = clientName;
-            _accountNumber = clientId;
+            _ClientId = personId;
+            _ClientName = clientName;
+            _AccountNumber = personId;
 
             transaction = new Transaction();
-            balance = new Balance(_clientId);
+            balance = new Balance(_ClientId);
         }
 
         public int ClientId()
         {
-            return _clientId;
+            return _ClientId;
         }
 
         public void Deposit(int transId, float transAmount, int transTime)
         {
             transaction.RecordTrans(transId, transAmount, transTime);
             balance.UpdateBalance(transAmount);
+       
         }
 
         public float GetBalance()

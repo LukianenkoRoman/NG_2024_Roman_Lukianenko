@@ -2,21 +2,20 @@ using System;
 
 namespace Task_1
 {
-    public class Person : Client
+    public class Person 
     {
-        private int _personId;
-        private string _address;
+        private int _PersonId;
+        private string _Address;
 
-        public Person(int clientId, string clientName, int personId, string address)
-            : base(clientId, clientName)
+        public Person(int personId, string address)
         {
-            _personId = clientId;
-            _address = address;
+            _PersonId = personId;
+            _Address = address;
         }
 
         public int PersonId()
         {
-            return _personId;
+            return _PersonId;
         }
     }
 }

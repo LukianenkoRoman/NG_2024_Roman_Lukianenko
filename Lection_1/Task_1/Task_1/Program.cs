@@ -7,24 +7,21 @@ namespace Task_1
     {
         static void Main(string[] args)
         {
-            Admin admin = new Admin(1, "Victor Vasya", 101, "Zhitomyr", 1001, "Admin");
+            Admin admin = new Admin(1, "admin", 1, "Zhitomir");
 
-            Client newClient = new Client(2, "Ivan Chornozem");
+            Client newClient = new Client(2, "Kropivnitsky", 2, "Ivan Chornozem");
             admin.AddClient(newClient);
             Console.WriteLine($"Current balance: {newClient.GetBalance()}");
             newClient.Deposit(2, 200, 12346);
             Console.WriteLine($"Current balance: {newClient.GetBalance()}");
+            admin.ViewTransactions(2);
 
-            admin.ViewTransactions();
-
-
-            Client newClient2 = new Client(3, "Valery Shmishenko");
+            Client newClient2 = new Client(3, "Vinitsa", 3, "Valery Shmishenko");
             admin.AddClient(newClient2);
             Console.WriteLine($"Current balance: {newClient2.GetBalance()}");
             newClient2.Deposit(2, 300, 12346);
             Console.WriteLine($"Current balance: {newClient2.GetBalance()}");
-
-            admin.ViewTransactions();
+            admin.ViewTransactions(3);
 
             admin.RemoveClient(newClient);
 

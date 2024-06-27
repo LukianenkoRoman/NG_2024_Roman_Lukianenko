@@ -13,10 +13,10 @@ namespace Task_1
 
         private List<Client> clients = new List<Client>();
 
-        public Admin(int clientId, string clientName, int personId, string address, int adminId, string role)
-            : base(clientId, clientName, personId, address)
+        public Admin(int adminId, string role, int personId, string address)
+            : base(personId, address)
         {
-            _adminId = adminId;
+            _adminId = personId;
             _role = role;
         }
 
@@ -43,15 +43,19 @@ namespace Task_1
             int iddel = client.ClientId();
             clients.Remove(client);
             Console.WriteLine($"Client {iddel} removed successfully.");
-
         }
 
-        public void ViewTransactions()
+        public void ViewTransactions(int clientId)
         {
-            foreach (Client client in clients)
+            Client client = clients.FirstOrDefault(c => c.ClientId() == clientId);
+
+            List<Transaction> clientTransactions = client.GetTransactions();
+
+            foreach (Transaction transaction in clientTransactions)
             {
-                List<Transaction> clientTransactions = client.GetTransactions();
-                Console.WriteLine("Transaction history for client " + client.ClientId());
+                Console.WriteLine(transaction.TransId);
+                Console.WriteLine(transaction.TransTime);
+                Console.WriteLine(transaction.TransAmount);
             }
         }
     }
