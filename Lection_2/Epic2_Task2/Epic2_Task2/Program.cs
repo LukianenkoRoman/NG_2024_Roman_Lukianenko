@@ -29,27 +29,23 @@ class Program
                     service.GetGaneByPriceRange(500, 1500);
                     return;
                 case 3:
-                    var games = service.GetGameByGenre(5); 
-                    foreach (var game in games)
+                    int gameId = 3;
+                    string resault = service.GetGenresByGameId(gameId);
+                    Console.WriteLine(resault);
+                    return;
+                case 4:
+                    List<string> genre = new List<string>() { "Strategy" };
+                    List<string> category = new List<string>() { "Moba" };
+
+                    List<Game> filteredGames = service.GetFilteredByGenre(genre, category);
+
+                    foreach (var game in filteredGames)
                     {
                         Console.WriteLine(game.Name);
                     }
                     return;
-                case 4:
-                    var filteredGames = service.GetFilteredByGenre(new List<string>() { "Shooter", "Strategy" });
-
-                    foreach (var game in filteredGames)
-                    {
-                        foreach (var genre in game.Genres)
-                        {
-                            Console.WriteLine(game.Name);
-                            Console.WriteLine(genre.Name);
-                        }
-                    }
-                    return;
                 case 5:
                     var firstPage = service.GetGamesByPagination(new PaginationModel { PageNumber = 1, PageSize = 5 });
-
                     var secondPage = service.GetGamesByPagination(new PaginationModel { PageNumber = 2, PageSize = 5 });
 
                     Console.WriteLine("Page 1:");
@@ -57,10 +53,32 @@ class Program
                     {
                         Console.WriteLine(game.Name);
                     }
-                    Console.WriteLine("Page 2:");
-                    foreach(var game in secondPage)
+
+                    Console.WriteLine("Write 1 if you want to see page 2");
+                    int choice2 = int.Parse(Console.ReadLine());
+
+                    if (choice2 == 1)
                     {
-                        Console.WriteLine(game.Name);
+                        Console.WriteLine("---------------------------------");
+
+                        Console.WriteLine("Page 2:");
+                        foreach (var game in secondPage)
+                        {
+                            Console.WriteLine(game.Name);
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    return;
+
+                case 6:
+                    List<string> uniqueCategories = service.GetUniqueCategories();
+
+                    foreach (string uniqueCategory in uniqueCategories)
+                    {
+                        Console.WriteLine(uniqueCategory);
                     }
                     return;
                 default:

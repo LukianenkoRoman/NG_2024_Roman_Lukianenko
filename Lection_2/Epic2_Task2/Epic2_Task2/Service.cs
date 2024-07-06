@@ -106,18 +106,16 @@ namespace Epic2_Task2
             return inPriceRange;
         }
 
-        public List<Game> GetGameByGenre(int id)
+        public String GetGenresByGameId(int gameId)
         {
-            var selectedGanre = Games.FirstOrDefault(x => x.Id == id);
-
-            var sameGenre = Games.Where(game => game.Genres.Any(genre => genre.Name == selectedGanre.Genres[0].Name));
-
-            return sameGenre.ToList();
+            var game = Games.FirstOrDefault(g => g.Id == gameId);
+            string genreName = game.Genres.FirstOrDefault().Name;
+            return genreName;
         }
 
-        public List<Game> GetFilteredByGenre(List<string> genres)
+        public List<Game> GetFilteredByGenre(List<string> genres, List<string> categorys)
         {
-            var filteredGames = Games.Where(g => g.Genres.Any(genre => genres.Contains(genre.Name)));
+            var filteredGames = Games.Where(g => g.Genres.Any(genre => genres.Contains(genre.Name))).Where(g => categorys.Contains(g.Category));
             return filteredGames.ToList();
         }
 
@@ -125,6 +123,13 @@ namespace Epic2_Task2
         {
             var currentPage = Games.Take(pagination.PageSize).ToList();
             return currentPage;
+        }
+
+        public List<string> GetUniqueCategories()
+        {
+            var uniqueCategori = Games.Select(game => game.Category).ToList();
+
+            return uniqueCategori.Distinct().ToList();
         }
     }
 }
