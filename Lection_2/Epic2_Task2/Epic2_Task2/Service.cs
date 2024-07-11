@@ -119,10 +119,13 @@ namespace Epic2_Task2
             return filteredGames.ToList();
         }
 
-        public List<Game> GetGamesByPagination(PaginationModel pagination)
+        public List<Game> GetGamesByPagination(int pageNumber, int pageSize) 
         {
-            var currentPage = Games.Take(pagination.PageSize).ToList();
-            return currentPage;
+            int skip = pageNumber * pageSize;
+
+            var paginatedGames = Games.Skip(skip).Take(pageSize).ToList();
+
+            return paginatedGames;
         }
 
         public List<string> GetUniqueCategories()

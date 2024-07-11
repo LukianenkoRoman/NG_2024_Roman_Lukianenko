@@ -45,34 +45,16 @@ class Program
                     }
                     return;
                 case 5:
-                    var firstPage = service.GetGamesByPagination(new PaginationModel { PageNumber = 1, PageSize = 5 });
-                    var secondPage = service.GetGamesByPagination(new PaginationModel { PageNumber = 2, PageSize = 5 });
+                    int pageNumber = 0;
+                    int pageSize = 5;
 
-                    Console.WriteLine("Page 1:");
-                    foreach (var game in firstPage)
+                    List<Game> paginatedGames = service.GetGamesByPagination(pageNumber, pageSize);
+                    
+                    foreach (Game game in paginatedGames)
                     {
                         Console.WriteLine(game.Name);
                     }
-
-                    Console.WriteLine("Write 1 if you want to see page 2");
-                    int choice2 = int.Parse(Console.ReadLine());
-
-                    if (choice2 == 1)
-                    {
-                        Console.WriteLine("---------------------------------");
-
-                        Console.WriteLine("Page 2:");
-                        foreach (var game in secondPage)
-                        {
-                            Console.WriteLine(game.Name);
-                        }
-                    }
-                    else
-                    {
-                        return;
-                    }
                     return;
-
                 case 6:
                     List<string> uniqueCategories = service.GetUniqueCategories();
 
