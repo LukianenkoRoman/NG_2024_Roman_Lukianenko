@@ -20,10 +20,10 @@ public class ShopItemsReporService
 
     public XLTemplate GetReportTemplate()
     {
-        return new(@"./Templates/ActivityReport.xlsx");
+        return new(@".C:\Users\Asus\Desktop\ReportApp\ReportApp\Templates\ShopReport.xlsx");
     }
 
-    public ActivityReportConfiguration GetConfiguration(string path = @"./ReportConfigurations/Activity.json")
+    public ActivityReportConfiguration GetConfiguration(string path = @"./ReportConfigurations/ShopXls.json")
     {
         var configuration = new ActivityReportConfiguration().LoadFromFile(path);
         return configuration;
