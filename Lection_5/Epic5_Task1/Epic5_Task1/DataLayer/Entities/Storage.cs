@@ -1,4 +1,6 @@
-﻿namespace DataLayer.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DataLayer.Entities
 {
     public class Storage : IEntity
     {
@@ -8,5 +10,8 @@
         public int no { get; set; }
 
         public int directorId { get; set; }
+
+        [ForeignKey("directorId")]
+        public Manager manager { get; set; }
     }
 }
