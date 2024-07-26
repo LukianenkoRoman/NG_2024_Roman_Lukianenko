@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace Epic5_Task1.DataLayer.Data.Repositories.Realization
 {
-    public class Repository : IRepository<IEntity> 
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : IEntity
     {
         private readonly Task5DbContext _dbContext;
 
@@ -16,39 +16,39 @@ namespace Epic5_Task1.DataLayer.Data.Repositories.Realization
             _dbContext = dbContext;
         }
 
-        public async Task<IEntity> Create(IEntity entity)
+        public async Task<TEntity> Create(TEntity entity)
         {
-            var createdEntity = await _dbContext.Set<IEntity>().AddAsync(entity);
+            var createdEntity = await _dbContext.Set<TEntity>().AddAsync(entity);
             return createdEntity.Entity;
         }
 
         public async Task Delete(Guid id)
         {
-            var entity = _dbContext.Set<IEntity>().Find(id);
+            var entity = _dbContext.Set<TEntity>().Find(id);
             if (entity != null)
             {
-                _dbContext.Set<IEntity>().Remove(entity);
+                _dbContext.Set<TEntity>().Remove(entity);
             }
         }
 
-        public async Task<IEntity> Find(Guid id)
+        public async Task<TEntity> Find(Guid id)
         {
-            return await _dbContext.Set<IEntity>().FindAsync(id);
+            return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
-        public IQueryable<IEntity> GetAll()
+        public IQueryable<TEntity> GetAll()
         {
-            return _dbContext.Set<IEntity>();
+            return _dbContext.Set<TEntity>();
         }
 
-        public async Task<List<IEntity>> GetAllAsync(Expression<Func<IEntity, bool>> expression)
+        public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> expression)
         {
-            return await _dbContext.Set<IEntity>().Where(expression).ToListAsync();
+            return await _dbContext.Set<TEntity>().Where(expression).ToListAsync();
         }
 
-        public async Task<IEntity> Update(IEntity entity)
+        public async Task<TEntity> Update(TEntity entity)
         {
-            var updatedEntity = _dbContext.Set<IEntity>().Update(entity);
+            var updatedEntity = _dbContext.Set<TEntity>().Update(entity);
             return updatedEntity.Entity;
         }
     }
