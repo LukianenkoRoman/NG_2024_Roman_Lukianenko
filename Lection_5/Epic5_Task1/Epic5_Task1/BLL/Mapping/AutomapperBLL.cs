@@ -16,7 +16,7 @@ namespace Epic5_Task1.BLL.Mapping
                     dest => dest.description,
                     opt => opt.MapFrom(src => src.description)).ReverseMap();
 
-            CreateMap<Client, ClientModel>()
+            CreateMap<Client, ClientReadModel>()
                 .ForMember(
                     dest => dest.Id,
                     opt => opt.MapFrom(src => src.Id))
