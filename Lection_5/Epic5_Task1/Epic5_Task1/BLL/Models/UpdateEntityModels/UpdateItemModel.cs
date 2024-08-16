@@ -8,7 +8,7 @@
 
         public int weight { get; set; }
 
-        public List<Guid> description { get; set; }
+        public List<CategoryModel> description { get; set; }
         public Guid? storageId { get; set; }
     }
 }

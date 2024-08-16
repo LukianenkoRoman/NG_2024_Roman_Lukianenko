@@ -8,7 +8,7 @@
 
         public int weight { get; set; }
 
-        public ICollection<Guid?> description { get; set; }
+        public ICollection<CategoryModel> description { get; set; }
         public Guid? storageId { get; set; }
     }
 }
