@@ -4,6 +4,8 @@ using Epic5_Task1.BLL.Models.GetEntityModels;
 using Epic5_Task1.BLL.Services.Interfaces;
 using Epic5_Task1.DataLayer.Data.Infrastucture;
 using Epic5_Task1.DataLayer.Data.Repositories.Interfaces;
+using System.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Epic5_Task1.BLL.Services.Realization
 {
@@ -39,7 +41,7 @@ namespace Epic5_Task1.BLL.Services.Realization
                 item.reciverId = existingReciver;
             }
 
-            if(model is not null && model.senderId.HasValue)
+            if (model is not null && model.senderId.HasValue)
             {
                 var existingSender = await clientRepository.Find(model.senderId.Value);
                 item.senderId = existingSender;
@@ -48,7 +50,7 @@ namespace Epic5_Task1.BLL.Services.Realization
             if (model is not null && model.storageId.HasValue)
             {
                 var existingStorage = await storageRepositry.Find(model.storageId.Value);
-                item.senderId = existingStorage;
+                item.Storage = existingStorage;
             }
 
             var result = await itemRepository.Create(item);
@@ -136,5 +138,21 @@ namespace Epic5_Task1.BLL.Services.Realization
             return _mapper.Map<ItemReadModel>(item);
         }
 
+        public async Task<IEnumerable<ItemModel>> GetByDescriptionAsync(string description, Guid weight, int minWeight, int maxWeight )
+        {
+            var itemRepository = _unitOfWork.ItemRepository;
+            var categoryRepository = _unitOfWork.CategoryRepository;
+
+            var categories = await categoryRepository.GetAllAsync(x => x.description.Contains(description));
+            var categoryIds = categories.Select(x => x.Id);
+
+            var itemWeight = itemRepository.Find(weight);
+
+            var items = await itemRepository.GetAllAsync(x => x.description.Any(x => categoryIds.Contains(x.Id)));
+
+            var inWeightDiapason = items.Where(item => item.weight >= minWeight &&  item.weight <= maxWeight);
+
+            return _mapper.Map<IEnumerable<ItemModel>>(inWeightDiapason);
+        }
     }
 }

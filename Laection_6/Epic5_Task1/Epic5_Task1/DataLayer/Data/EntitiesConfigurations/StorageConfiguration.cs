@@ -24,11 +24,6 @@ namespace Epic5_Task1.DataLayer.Data.EntitiesConfigurations
                 .HasOne(x => x.directorId)
                 .WithOne(x => x.Manager)
                 .HasForeignKey(x => x.StorageId);
-
-            builder
-                .HasOne(x => x.employerId)
-                .WithOne(x => x.Employer)
-                .HasForeignKey(x => x.EployerId);
         }
     }
 }

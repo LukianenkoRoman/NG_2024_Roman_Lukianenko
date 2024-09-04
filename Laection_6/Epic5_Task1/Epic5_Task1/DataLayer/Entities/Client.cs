@@ -1,9 +1,10 @@
 ﻿namespace DataLayer.Entities
 {
-    public class Manager : IEntity
+    public class Client : IEntity
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public Guid employerId { get; set; }
+
+        public int phone { get; set; }
     }
 }
