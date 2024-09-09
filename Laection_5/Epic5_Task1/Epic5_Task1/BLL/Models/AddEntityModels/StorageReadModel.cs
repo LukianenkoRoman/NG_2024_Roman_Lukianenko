@@ -2,11 +2,13 @@
 {
     public class StorageReadModel
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public string adress { get; set; }
 
         public int no { get; set; }
 
-        public Guid directorId { get; set; }
+        public Guid? directorId { get; set; }
+        
+        public Guid? employerId { get; set; }
     }
 }

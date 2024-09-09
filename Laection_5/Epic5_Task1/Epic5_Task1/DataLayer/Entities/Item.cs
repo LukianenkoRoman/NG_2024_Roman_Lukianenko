@@ -10,7 +10,7 @@ namespace DataLayer.Entities
 
         public int weight { get; set; }
 
-        public string description { get; set; }
+        public ICollection<Category> description{ get; set; }
         public int storageId { get; set; }
 
         [ForeignKey("storageId")]

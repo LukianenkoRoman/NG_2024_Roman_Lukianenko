@@ -9,9 +9,9 @@ namespace DataLayer.Entities
 
         public int no { get; set; }
 
-        public int Director { get; set; }
+        public Guid Director { get; set; }
 
-        public int Employer { get; set; }
+        public Guid Employer { get; set; }
 
         [ForeignKey("Director")]
         public Manager manager { get; set; }
