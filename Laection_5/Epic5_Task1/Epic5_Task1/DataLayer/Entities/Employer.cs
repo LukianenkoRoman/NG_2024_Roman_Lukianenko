@@ -13,7 +13,7 @@ namespace DataLayer.Entities
 
         public string position { get; set; }
 
-        public int storageId { get; set; }
+        public Guid storageId { get; set; }
 
         [ForeignKey("storageId")]
         public Storage Storage { get; set; }

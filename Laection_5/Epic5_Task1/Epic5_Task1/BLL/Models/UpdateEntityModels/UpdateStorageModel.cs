@@ -8,5 +8,7 @@
         public int no { get; set; }
 
         public Guid directorId { get; set; }
+        
+        public Guid employerId { get; set; }
     }
 }

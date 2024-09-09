@@ -23,7 +23,7 @@ namespace Epic5_Task1.DataLayer.Data.Infrastucture
             modelBuilder.ApplyConfiguration(new ClientConfiguration());
             modelBuilder.ApplyConfiguration(new EmployerConfiguration());
             modelBuilder.ApplyConfiguration(new ManagerConfiguration());
-            modelBuilder.ApplyConfiguration(new StorageConfiguration);
+            modelBuilder.ApplyConfiguration(new StorageConfiguration());
         }
     }
 }
